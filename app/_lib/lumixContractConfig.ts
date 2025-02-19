@@ -1,3 +1,5 @@
+export const LUMIX_DECIMALS = 18;
+
 export const lumixContractConfig = {
   address: "0x2E7cF6DCC96b5Fcf187112A0214cAaC3c589E3dF",
   abi: [

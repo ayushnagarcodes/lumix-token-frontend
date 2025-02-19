@@ -16,9 +16,7 @@ export const config = createConfig({
     injected(),
   ],
   transports: {
-    [sepolia.id]: http(
-      `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`
-    ),
+    [sepolia.id]: http("/api/sepoliaProxy"),
   },
   ssr: true,
   storage: createStorage({

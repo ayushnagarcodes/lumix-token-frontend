@@ -6,13 +6,13 @@ import { type State, WagmiProvider } from "wagmi";
 import { config } from "@/_lib/wagmiConfig";
 
 interface ProvidersProps {
-  children: React.ReactNode;
   initialState: State | undefined;
+  children: React.ReactNode;
 }
 
 const queryClient = new QueryClient();
 
-export function Providers({ children, initialState }: ProvidersProps) {
+export function Providers({ initialState, children }: ProvidersProps) {
   return (
     <WagmiProvider config={config} initialState={initialState}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

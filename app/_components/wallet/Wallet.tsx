@@ -3,15 +3,28 @@
 import { useAccount, useDisconnect } from "wagmi";
 import ConnectWallet from "@/_components/wallet/ConnectWallet";
 import CopyClipboard from "@/_components/CopyClipboard";
+import useBalance from "@/_hooks/useBalance";
+import Spinner from "@/_components/Spinner";
+import RefreshPage from "@/_components/RefreshPage";
 
 function Wallet() {
   const { isConnected, address, chain } = useAccount();
   const { disconnect } = useDisconnect();
+  const { balance, balanceError, isBalanceLoading } = useBalance(address);
 
   if (!isConnected || !address) return <ConnectWallet />;
 
   return (
-    <div className="flex gap-4 items-center">
+    <div className="flex flex-wrap gap-4 items-center justify-center">
+      <div className="flex items-center gap-2 bg-slate-100 py-2 pr-4 pl-[18px] rounded-full">
+        <span className="text-slate-800 font-medium">Balance: </span>
+        {isBalanceLoading ? (
+          <Spinner height={18} width={18} />
+        ) : (
+          <span>{balanceError ? "_" : balance} LMX</span>
+        )}
+      </div>
+
       <div className="flex items-center gap-2 bg-slate-100 py-2 pr-4 pl-[18px] rounded-full">
         <span className="text-slate-800 font-medium">{chain?.name}</span>|
         <span>{address.slice(0, 7) + "..." + address.slice(-5)}</span>
@@ -21,9 +34,12 @@ function Wallet() {
         ></CopyClipboard>
       </div>
 
-      <button className="btn-styles" onClick={() => disconnect()}>
-        Disconnect
-      </button>
+      <div className="flex gap-4">
+        <button className="btn-styles" onClick={() => disconnect()}>
+          Disconnect
+        </button>
+        <RefreshPage />
+      </div>
     </div>
   );
 }
