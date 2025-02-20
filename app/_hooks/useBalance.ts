@@ -1,6 +1,6 @@
 import { useReadContract } from "wagmi";
 import toast from "react-hot-toast";
-import type { AddressType } from "@/_components/_types/types";
+import type { AddressType } from "@/_types/types";
 import { lumixContractConfig } from "@/_lib/lumixContractConfig";
 import { useEffect } from "react";
 import { formatTokenAmount } from "@/_lib/utils";

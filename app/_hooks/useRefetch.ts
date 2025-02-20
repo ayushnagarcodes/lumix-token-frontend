@@ -1,4 +1,4 @@
-import { RefetchFnType } from "@/_components/_types/types";
+import { RefetchFnType } from "@/_types/types";
 import { useEffect } from "react";
 import { useBlockNumber } from "wagmi";
 
