@@ -3,16 +3,15 @@ import IconLink from "@/_assets/icons/link.svg";
 import { ETHERSCAN_URL } from "@/_lib/lumixContractConfig";
 import Link from "next/link";
 import TokenInfoList from "@/_components/tokenInfo/TokenInfoList";
+import SectionTitle from "@/_components/SectionTitle";
 
 function TokenInfo() {
   return (
     <section className="section-styles">
       <div className="flex gap-3 items-center mb-6">
-        <div className="bg-slate-600 text-white rounded-lg p-3 flex items-center justify-center">
+        <SectionTitle title="Token Info">
           <IconCashRegister height={24} width={24} />
-        </div>
-
-        <h2 className="text-xl font-medium">Token Info</h2>
+        </SectionTitle>
 
         <Link
           className="text-slate-800 underline underline-offset-4 ml-auto flex gap-1 items-center text-lg"

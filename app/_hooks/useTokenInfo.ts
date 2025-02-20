@@ -6,9 +6,23 @@ import { formatAddress, formatTokenAmount } from "@/_lib/utils";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useReadContracts } from "wagmi";
+import type { ReadContractsErrorType } from "wagmi/actions";
 
-function useTokenInfo() {
-  const { data, isPending, error } = useReadContracts({
+type TokenInfo = {
+  label: string;
+  value: string | number;
+  showCopyBtn?: boolean;
+  copyValue?: string;
+};
+
+type useTokenInfoReturnType = {
+  tokenInfo: TokenInfo[];
+  isLoading: boolean;
+  error: ReadContractsErrorType | null;
+};
+
+function useTokenInfo(): useTokenInfoReturnType {
+  const { data, isLoading, error } = useReadContracts({
     contracts: [
       {
         ...lumixContractConfig,
@@ -53,35 +67,37 @@ function useTokenInfo() {
         label: "Total Supply",
         value: totalSupply?.result
           ? formatTokenAmount(totalSupply.result)
-          : "_",
+          : "...",
       },
       {
         label: "Cap",
-        value: cap?.result ? formatTokenAmount(cap.result) : "_",
+        value: cap?.result ? formatTokenAmount(cap.result) : "...",
       },
       {
         label: "Contract Owner",
         value: contractOwner?.result
           ? formatAddress(contractOwner.result)
-          : "_",
+          : "...",
         showCopyBtn: true,
+        copyValue: contractOwner?.result ?? "",
       },
       {
         label: "Contract Address",
         value: formatAddress(lumixContractConfig.address),
         showCopyBtn: true,
+        copyValue: lumixContractConfig.address,
       },
       {
         label: "Status",
         value:
-          isPending || isPaused?.status === "failure"
-            ? "_"
+          isLoading || isPaused?.status === "failure"
+            ? "..."
             : isPaused?.result
             ? "Paused"
             : "Active",
       },
     ],
-    isPending,
+    isLoading,
     error,
   };
 }

@@ -12,10 +12,34 @@ body {
   }
 
   .section-styles {
-    @apply bg-slate-100 p-8 rounded-2xl;
+    @apply bg-slate-100 p-5 sm:p-8 rounded-2xl;
   }
 
   .section-grid {
-    @apply grid grid-rows-[auto,1fr] grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-6;
+    @apply grid sm:grid-cols-[repeat(auto-fit,minmax(22rem,1fr))] gap-6;
+  }
+
+  .card-styles {
+    @apply rounded-xl p-0 sm:p-8 lg:p-10 bg-slate-50 grid place-items-center;
+  }
+
+  .form-styles {
+    @apply p-6 rounded-xl bg-white border border-slate-200 flex flex-col gap-6 justify-center w-full sm:max-w-96;
+  }
+
+  .form-heading {
+    @apply text-lg text-center font-[530] text-slate-800;
+  }
+
+  .label-styles {
+    @apply text-sm mb-1 inline-block text-slate-800;
+  }
+
+  .input-styles {
+    @apply w-full px-4 py-2 border border-slate-200 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-slate-500 text-slate-800;
+  }
+
+  .input-error-styles {
+    @apply mt-1 inline-block text-sm text-red-500;
   }
 }

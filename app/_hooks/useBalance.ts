@@ -9,7 +9,7 @@ function useBalance(address: AddressType | undefined) {
   const {
     data: balance,
     error: balanceError,
-    isPending: isBalanceLoading,
+    isLoading: isBalanceLoading,
   } = useReadContract({
     ...lumixContractConfig,
     functionName: "balanceOf",

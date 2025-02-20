@@ -24,7 +24,7 @@ function Wallet() {
         {isBalanceLoading ? (
           <Spinner height={18} width={18} />
         ) : (
-          <span>{balanceError ? "_" : balance}</span>
+          <span>{balanceError ? "..." : balance}</span>
         )}
       </div>
 

@@ -5,9 +5,9 @@ import Spinner from "@/_components/Spinner";
 import CopyClipboard from "@/_components/CopyClipboard";
 
 function TokenInfoList() {
-  const { tokenInfo, isPending } = useTokenInfo();
+  const { tokenInfo, isLoading } = useTokenInfo();
 
-  if (isPending)
+  if (isLoading)
     return <Spinner className="mx-auto mb-6" height={32} width={32} />;
 
   return (
@@ -23,7 +23,7 @@ function TokenInfoList() {
             <span className="text-slate-700">{info.value}</span>
             {info.showCopyBtn && (
               <CopyClipboard
-                text={info.value}
+                text={info.copyValue ?? ""}
                 className="relative top-[2px] ml-[5px]"
                 height={17}
                 width={17}
