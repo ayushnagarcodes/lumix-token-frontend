@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useConnect } from "wagmi";
 import IconWallet from "@/_assets/icons/wallet.svg";
 import Spinner from "@/_components/Spinner";
+import { connectorLogos } from "@/_lib/utils";
 
 interface WalletOptionsProps {
   onCloseModal?: () => void; // will be replaced by onCloseModal coming from cloneElement in Modal
@@ -40,6 +41,7 @@ function WalletOptions({ onCloseModal }: WalletOptionsProps) {
 
       {connectors.map((connector) => {
         const isConnectorPending = pendingConnectorId === connector.uid;
+        const ConnectorLogo = connectorLogos[connector.name] || IconWallet;
 
         return (
           <button
@@ -51,7 +53,7 @@ function WalletOptions({ onCloseModal }: WalletOptionsProps) {
             {isConnectorPending ? (
               <Spinner height={22} width={22} />
             ) : (
-              <IconWallet height={24} width={24} />
+              <ConnectorLogo height={24} width={24} />
             )}
             {connector.name}
           </button>

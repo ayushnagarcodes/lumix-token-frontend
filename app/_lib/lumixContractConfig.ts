@@ -1,5 +1,8 @@
 export const LUMIX_DECIMALS = 18;
 
+export const ETHERSCAN_URL =
+  "https://sepolia.etherscan.io/token/0x2e7cf6dcc96b5fcf187112a0214caac3c589e3df";
+
 export const lumixContractConfig = {
   address: "0x2E7cF6DCC96b5Fcf187112A0214cAaC3c589E3dF",
   abi: [

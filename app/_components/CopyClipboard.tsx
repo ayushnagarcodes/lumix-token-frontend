@@ -7,9 +7,11 @@ import IconCopy from "@/_assets/icons/copy.svg";
 interface CopyClipboardProps {
   text: string;
   className?: string;
+  height: number;
+  width: number;
 }
 
-function CopyClipboard({ text, className }: CopyClipboardProps) {
+function CopyClipboard({ text, className, height, width }: CopyClipboardProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCopy = () => {
@@ -21,9 +23,9 @@ function CopyClipboard({ text, className }: CopyClipboardProps) {
   return (
     <button className={className} onClick={handleCopy} type="button">
       {isChecked ? (
-        <IconCheck height={20} width={20} />
+        <IconCheck height={height} width={width} />
       ) : (
-        <IconCopy height={20} width={20} />
+        <IconCopy height={height} width={width} />
       )}
     </button>
   );

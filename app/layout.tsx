@@ -31,7 +31,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} relative text-base font-normal antialiased px-4 sm:p-8 max-w-[90rem] mx-auto`}
+        className={`${geistSans.variable} relative text-base font-normal antialiased px-4 md:p-8 max-w-[90rem] mx-auto`}
       >
         <Providers initialState={initialState}>{children}</Providers>
         <Toaster toastOptions={{ style: { padding: "12px 20px" } }} />
