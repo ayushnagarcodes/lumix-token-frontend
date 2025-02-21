@@ -1,31 +1,16 @@
 "use client";
 
 import Form from "@/_components/Form";
+import useWriteWithConfirmation from "@/_hooks/useWriteWithConfirmation";
 import {
   LUMIX_DECIMALS,
   lumixContractConfig,
 } from "@/_lib/lumixContractConfig";
 import type { AddressType, FormDataType } from "@/_types/types";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
 import { parseUnits } from "viem";
-import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 
 function Transfer() {
-  const { data: hash, writeContract, isPending, error } = useWriteContract();
-
-  const { isLoading: isConfirming, isSuccess: isConfirmed } =
-    useWaitForTransactionReceipt({
-      hash,
-    });
-
-  useEffect(() => {
-    if (error) toast.error("Transaction failed");
-  }, [error]);
-
-  useEffect(() => {
-    if (isConfirmed) toast.success("Transaction successful");
-  }, [isConfirmed]);
+  const { writeContract, isPending, isConfirming } = useWriteWithConfirmation();
 
   function handleSubmit(data: FormDataType) {
     const { receiverAddress, amount } = data;
