@@ -8,7 +8,7 @@ import Spinner from "@/_components/Spinner";
 interface BaseInputField extends ComponentProps<"input"> {
   label: string;
   name: string;
-  type?: "text | number";
+  type?: "text" | "number";
 }
 
 interface AddressInputField extends BaseInputField {
@@ -29,7 +29,7 @@ interface FormProps {
   onSubmit: (data: FormDataType) => void;
   submitBtnText?: string;
   isPending: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 function Form({
@@ -96,7 +96,7 @@ function Form({
               type={field.type || "text"}
               className="input-styles"
               placeholder={
-                field.placeholder || field.isAddress ? "0x1234...5678" : ""
+                field.placeholder || (field.isAddress ? "0x1234...5678" : "")
               }
             />
             {errors?.[field.name] && (
@@ -107,7 +107,11 @@ function Form({
 
         {!hasErrors && children}
 
-        <button className="btn-styles w-full">
+        <button
+          className="btn-styles w-full"
+          disabled={isPending}
+          type="submit"
+        >
           {isPending ? <Spinner height={22} width={22} /> : submitBtnText}
         </button>
       </form>
