@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lumix Token Frontend
+
+Dashboard for interacting with the Lumix ERC20 token, built with **Next.js, Wagmi, TypeScript, and Tailwind CSS**. This dApp integrates with **MetaMask, Coinbase Wallet, and other injected wallets** via Wagmi.
+
+## Features
+
+- 🚀 Built with **Next.js** for performance
+- 📡 **Wagmi hooks** for efficient blockchain interactions
+- ⚙️ Type-safe implementation using **TypeScript**
+- 🔄 **Reusable components** for improved maintainability
+
+## Usage
+
+### Connecting Wallets
+
+Users can connect their wallets, which supports:
+
+- **MetaMask**
+- **Coinbase Wallet**
+- **Injected Wallets**
+
+### Token Interactions
+
+The frontend enables users to perform:
+
+#### Read Operations
+
+- 💰 **Check balance** to view an account's token holdings
+- 🔍 **Check allowance** to see the approved spending amount
+
+#### Transactions
+
+- 🔄 **Transfer tokens** to another address
+- ✅ **Approve token spending** using allowance mechanism
+- 🔄 **Transfer tokens using allowance**
+- 🎁 **Claim Lumix tokens from the faucet** – one-time per address
+
+#### Owner Actions
+
+- 🏗️ **Mint new tokens** to increase supply within the cap
+- 🔥 **Burn tokens** to reduce supply
+- 🔄 **Transfer contract ownership** to another address
+- ⏸️ **Pause or resume transactions** for emergency control
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Ensure you have the following installed:
+
+- **Node.js** (latest LTS recommended)
+- **Yarn** or **npm**
+
+### Installation
+
+Clone the repository and install dependencies:
+
+```sh
+git clone https://github.com/ayushnagarcodes/lumix-token-frontend.git
+cd lumix-token-frontend
+npm install  # or yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env` file in the root directory and add the necessary environment variables:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+ALCHEMY_API_KEY=your_alchemy_key
+```
 
-## Learn More
+### Running the App
 
-To learn more about Next.js, take a look at the following resources:
+Start the development server:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```sh
+npm run dev  # or yarn dev
+```
