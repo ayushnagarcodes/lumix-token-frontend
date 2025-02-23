@@ -1,5 +1,6 @@
 import IconCoin from "@/_assets/icons/coin.svg";
 import IconSend from "@/_assets/icons/send.svg";
+import IconBank from "@/_assets/icons/bank.svg";
 import TokenInfo from "@/_components/tokenInfo/TokenInfo";
 import SectionTitle from "@/_components/SectionTitle";
 import CheckBalance from "@/_components/queries/CheckBalance";
@@ -9,6 +10,8 @@ import Header from "@/_components/Header";
 import ApproveAllowance from "@/_components/transactions/ApproveAllowance";
 import TransferFrom from "@/_components/transactions/TransferFrom";
 import Faucet from "@/_components/transactions/Faucet";
+import Mint from "@/_components/transactions/Mint";
+import Burn from "@/_components/transactions/Burn";
 
 export default function App() {
   return (
@@ -41,6 +44,18 @@ export default function App() {
             <ApproveAllowance />
             <TransferFrom />
             <Faucet />
+          </div>
+        </section>
+
+        <section className="section-styles">
+          <div className="flex gap-3 items-center mb-7">
+            <SectionTitle title="Owner Actions">
+              <IconBank height={24} width={24} />
+            </SectionTitle>
+          </div>
+          <div className="section-grid">
+            <Mint />
+            <Burn />
           </div>
         </section>
       </main>
