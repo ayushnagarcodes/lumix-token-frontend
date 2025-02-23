@@ -12,6 +12,8 @@ import TransferFrom from "@/_components/transactions/TransferFrom";
 import Faucet from "@/_components/transactions/Faucet";
 import Mint from "@/_components/transactions/Mint";
 import Burn from "@/_components/transactions/Burn";
+import TransferOwnership from "@/_components/transactions/TransferOwnership";
+import ChangeStatus from "@/_components/transactions/ChangeStatus";
 
 export default function App() {
   return (
@@ -56,6 +58,8 @@ export default function App() {
           <div className="section-grid">
             <Mint />
             <Burn />
+            <TransferOwnership />
+            <ChangeStatus />
           </div>
         </section>
       </main>
