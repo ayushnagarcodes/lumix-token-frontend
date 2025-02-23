@@ -6,6 +6,9 @@ import CheckBalance from "@/_components/queries/CheckBalance";
 import CheckAllowance from "@/_components/queries/CheckAllowance";
 import Transfer from "@/_components/transactions/Transfer";
 import Header from "@/_components/Header";
+import ApproveAllowance from "@/_components/transactions/ApproveAllowance";
+import TransferFrom from "@/_components/transactions/TransferFrom";
+import Faucet from "@/_components/transactions/Faucet";
 
 export default function App() {
   return (
@@ -35,6 +38,9 @@ export default function App() {
           </div>
           <div className="section-grid">
             <Transfer />
+            <ApproveAllowance />
+            <TransferFrom />
+            <Faucet />
           </div>
         </section>
       </main>

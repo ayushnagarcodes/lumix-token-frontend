@@ -98,6 +98,8 @@ function Form({
               placeholder={
                 field.placeholder || (field.isAddress ? "0x1234...5678" : "")
               }
+              defaultValue={field.defaultValue}
+              disabled={!!field.disabled}
             />
             {errors?.[field.name] && (
               <span className="input-error-styles">{errors[field.name]}</span>

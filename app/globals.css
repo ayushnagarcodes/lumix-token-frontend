@@ -16,7 +16,7 @@ body {
   }
 
   .section-grid {
-    @apply grid sm:grid-cols-[repeat(auto-fit,minmax(22rem,1fr))] gap-6;
+    @apply grid grid-cols-[1fr] mdx:grid-cols-[1fr_1fr] gap-6;
   }
 
   .card-styles {
@@ -36,7 +36,7 @@ body {
   }
 
   .input-styles {
-    @apply w-full px-4 py-2 border border-slate-200 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-slate-500 text-slate-800;
+    @apply w-full px-4 py-2 border border-slate-200 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-slate-500 text-slate-800 disabled:cursor-not-allowed;
   }
 
   .input-error-styles {
