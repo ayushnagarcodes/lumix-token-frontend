@@ -4,15 +4,20 @@ import Form from "@/_components/Form";
 import useWriteWithConfirmation from "@/_hooks/useWriteWithConfirmation";
 import { lumixContractConfig } from "@/_lib/lumixContractConfig";
 import type { AddressType, FormDataType } from "@/_types/types";
-import IconWarning from "@/_assets/icons/warning.svg";
 import useIsOwner from "@/_hooks/useIsOwner";
+import useContractStatus from "@/_hooks/useContractStatus";
+import Warning from "@/_components/Warning";
 
 function TransferOwnership() {
   const { isOwner, isLoading: isInfoLoading } = useIsOwner();
+  const { isPaused, isLoading: isStatusLoading } = useContractStatus();
   const { writeContract, isPending, isConfirming } = useWriteWithConfirmation();
 
+  const isWorking =
+    isConfirming || isPending || isInfoLoading || isStatusLoading;
+
   const handleSubmit = (data: FormDataType) => {
-    if (!isOwner) return;
+    if (!isOwner || isPaused) return;
 
     const { newOwnerAddress } = data;
 
@@ -35,13 +40,14 @@ function TransferOwnership() {
         },
       ]}
       onSubmit={handleSubmit}
-      isPending={isConfirming || isPending || isInfoLoading}
+      isPending={isWorking}
+      isPaused={isPaused}
     >
-      {!isOwner && (
-        <span className="text-sm text-red-500 flex items-center gap-1.5">
-          <IconWarning height={16} width={16} />
-          You&apos;re not the contract owner!
-        </span>
+      {!isWorking && !isOwner && !isPaused && (
+        <Warning text="You're not the contract owner!" color="red" />
+      )}
+      {!isWorking && isPaused && (
+        <Warning text="The contract is currently paused." color="yellow" />
       )}
     </Form>
   );

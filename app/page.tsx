@@ -20,7 +20,7 @@ export default function App() {
     <>
       <Header />
 
-      <main className="space-y-12 max-w-[90rem] mx-auto px-4 md:p-8 md:pt-6">
+      <main className="space-y-12 max-w-[90rem] mx-auto px-4 pb-8 md:p-8 md:pt-6">
         <TokenInfo />
 
         <section className="section-styles">

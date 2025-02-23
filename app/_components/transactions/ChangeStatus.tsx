@@ -3,14 +3,17 @@
 import Form from "@/_components/Form";
 import useWriteWithConfirmation from "@/_hooks/useWriteWithConfirmation";
 import { lumixContractConfig } from "@/_lib/lumixContractConfig";
-import IconWarning from "@/_assets/icons/warning.svg";
 import useIsOwner from "@/_hooks/useIsOwner";
 import useContractStatus from "@/_hooks/useContractStatus";
+import Warning from "@/_components/Warning";
 
 function ChangeStatus() {
   const { isOwner, isLoading: isOwnerLoading } = useIsOwner();
   const { isPaused, isLoading: isStatusLoading } = useContractStatus();
   const { writeContract, isPending, isConfirming } = useWriteWithConfirmation();
+
+  const isWorking =
+    isConfirming || isPending || isOwnerLoading || isStatusLoading;
 
   const handleSubmit = () => {
     if (!isOwner) return;
@@ -26,10 +29,10 @@ function ChangeStatus() {
       title="# Change Contract Status"
       fields={[]}
       onSubmit={handleSubmit}
-      isPending={isConfirming || isPending || isOwnerLoading || isStatusLoading}
+      isPending={isWorking}
       submitBtnText={isPaused ? "Unpause" : "Pause"}
     >
-      {isPaused ? (
+      {!isWorking && isPaused ? (
         <p className="text-sm text-yellow-600 text-center">
           The contract is currently paused. No new transactions can be made.
         </p>
@@ -38,11 +41,12 @@ function ChangeStatus() {
           The contract is currently active. New transactions can be made.
         </p>
       )}
-      {!isOwner && (
-        <span className="-mt-2 relative -left-1 text-sm text-red-500 flex items-center justify-center gap-1.5">
-          <IconWarning height={16} width={16} />
-          You&apos;re not the contract owner!
-        </span>
+      {!isWorking && !isOwner && (
+        <Warning
+          text="You're not the contract owner!"
+          color="red"
+          className="-mt-2 relative -left-1 justify-center"
+        />
       )}
     </Form>
   );

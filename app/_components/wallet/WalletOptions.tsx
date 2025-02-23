@@ -36,7 +36,7 @@ function WalletOptions({ onCloseModal }: WalletOptionsProps) {
   };
 
   return (
-    <div className="flex flex-col gap-4 min-w-80">
+    <div className="flex flex-col gap-4 min-w-[17rem] sm:min-w-80">
       <h2 className="mb-1 text-lg font-medium text-gray-800">Connect Wallet</h2>
 
       {connectors.map((connector) => {

@@ -8,15 +8,20 @@ import {
 } from "@/_lib/lumixContractConfig";
 import type { FormDataType } from "@/_types/types";
 import { parseUnits } from "viem";
-import IconWarning from "@/_assets/icons/warning.svg";
 import useIsOwner from "@/_hooks/useIsOwner";
+import useContractStatus from "@/_hooks/useContractStatus";
+import Warning from "@/_components/Warning";
 
 function Burn() {
   const { isOwner, isLoading: isInfoLoading } = useIsOwner();
+  const { isPaused, isLoading: isStatusLoading } = useContractStatus();
   const { writeContract, isPending, isConfirming } = useWriteWithConfirmation();
 
+  const isWorking =
+    isConfirming || isPending || isInfoLoading || isStatusLoading;
+
   const handleSubmit = (data: FormDataType) => {
-    if (!isOwner) return;
+    if (!isOwner || isPaused) return;
 
     const { amount } = data;
     const tokenAmount = parseUnits(String(amount), LUMIX_DECIMALS);
@@ -43,13 +48,14 @@ function Burn() {
         },
       ]}
       onSubmit={handleSubmit}
-      isPending={isConfirming || isPending || isInfoLoading}
+      isPending={isWorking}
+      isPaused={isPaused}
     >
-      {!isOwner && (
-        <span className="text-sm text-red-500 flex items-center gap-1.5">
-          <IconWarning height={16} width={16} />
-          You&apos;re not the contract owner!
-        </span>
+      {!isWorking && !isOwner && !isPaused && (
+        <Warning text="You're not the contract owner!" color="red" />
+      )}
+      {!isWorking && isPaused && (
+        <Warning text="The contract is currently paused." color="yellow" />
       )}
     </Form>
   );

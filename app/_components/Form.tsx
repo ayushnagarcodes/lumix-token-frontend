@@ -29,6 +29,7 @@ interface FormProps {
   onSubmit: (data: FormDataType) => void;
   submitBtnText?: string;
   isPending: boolean;
+  isPaused?: boolean;
   children?: React.ReactNode;
 }
 
@@ -38,6 +39,7 @@ function Form({
   onSubmit,
   submitBtnText = "Submit",
   isPending,
+  isPaused = false,
   children,
 }: FormProps) {
   const titleSlug = title.toLowerCase().replace(" ", "-");
@@ -46,6 +48,8 @@ function Form({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (isPaused) return;
 
     const formData = new FormData(event.currentTarget);
     const dataObj: FormDataType = {};

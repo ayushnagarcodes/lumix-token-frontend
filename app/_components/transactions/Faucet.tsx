@@ -5,13 +5,19 @@ import useWriteWithConfirmation from "@/_hooks/useWriteWithConfirmation";
 import { lumixContractConfig } from "@/_lib/lumixContractConfig";
 import { formatAddress } from "@/_lib/utils";
 import { useAccount } from "wagmi";
-import IconWarning from "@/_assets/icons/warning.svg";
+import useContractStatus from "@/_hooks/useContractStatus";
+import Warning from "@/_components/Warning";
 
 function Faucet() {
   const { address } = useAccount();
+  const { isPaused, isLoading: isStatusLoading } = useContractStatus();
   const { writeContract, isPending, isConfirming } = useWriteWithConfirmation();
 
+  const isWorking = isConfirming || isPending || isStatusLoading;
+
   const handleSubmit = () => {
+    if (isPaused) return;
+
     writeContract({
       ...lumixContractConfig,
       functionName: "claimFaucet",
@@ -40,12 +46,14 @@ function Faucet() {
         },
       ]}
       onSubmit={handleSubmit}
-      isPending={isConfirming || isPending}
+      isPending={isWorking}
+      isPaused={isPaused}
     >
-      <span className="text-sm text-red-500 flex items-center gap-1.5">
-        <IconWarning height={16} width={16} />
-        Can be claimed only once!
-      </span>
+      {!isWorking && isPaused ? (
+        <Warning text="The contract is currently paused." color="yellow" />
+      ) : (
+        <Warning text="Can be claimed only once!" color="red" />
+      )}
     </Form>
   );
 }
