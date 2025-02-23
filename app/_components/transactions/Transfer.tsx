@@ -12,7 +12,7 @@ import { parseUnits } from "viem";
 function Transfer() {
   const { writeContract, isPending, isConfirming } = useWriteWithConfirmation();
 
-  function handleSubmit(data: FormDataType) {
+  const handleSubmit = (data: FormDataType) => {
     const { receiverAddress, amount } = data;
     const tokenAmount = parseUnits(String(amount), LUMIX_DECIMALS);
 
@@ -21,19 +21,19 @@ function Transfer() {
       functionName: "transfer",
       args: [receiverAddress as AddressType, tokenAmount],
     });
-  }
+  };
 
   return (
     <Form
       title="# Transfer"
       fields={[
         {
-          label: " Enter Receiver Address",
+          label: "Enter Receiver Address",
           name: "receiverAddress",
           isAddress: true,
         },
         {
-          label: " Enter Amount",
+          label: "Enter Amount",
           name: "amount",
           type: "number",
           min: 0,

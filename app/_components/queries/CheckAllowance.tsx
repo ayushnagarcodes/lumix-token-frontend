@@ -17,10 +17,10 @@ function CheckAllowance() {
   const showAllowance =
     ownerAddress && spenderAddress && !allowanceError && !isAllowanceLoading;
 
-  function handleSubmit(data: FormDataType) {
+  const handleSubmit = (data: FormDataType) => {
     setOwnerAddress(data.ownerAddress as AddressType);
     setSpenderAddress(data.spenderAddress as AddressType);
-  }
+  };
 
   return (
     <Form

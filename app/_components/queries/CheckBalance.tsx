@@ -10,9 +10,9 @@ function CheckBalance() {
   const { balance, balanceError, isBalanceLoading } = useBalance(address);
   const showBalance = address && !balanceError && !isBalanceLoading;
 
-  function handleSubmit(data: FormDataType) {
+  const handleSubmit = (data: FormDataType) => {
     setAddress(data.address as AddressType);
-  }
+  };
 
   return (
     <Form

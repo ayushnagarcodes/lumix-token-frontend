@@ -44,7 +44,7 @@ function Form({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const hasErrors = Object.keys(errors).length > 0;
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -75,7 +75,7 @@ function Form({
 
     // Perform action
     onSubmit(dataObj);
-  }
+  };
 
   return (
     <div className="card-styles">
